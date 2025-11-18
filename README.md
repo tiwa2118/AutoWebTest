@@ -42,3 +42,25 @@ PyInstallerでビルドされた .exe も利用可能です。
 - 各シートが1つのシナリオ
 - アクション列、ターゲット列、値列などを記述
 - 詳細は scenarios/sample_scenario.xlsx を参照
+
+### 1. sample_scenario.xlsx の説明
+| 列名 | 説明 |
+| ---- | ---- |
+| Test Case ID | テストケースの識別子（空欄はスキップされる） |
+| Action | 実行する操作（click, input, wait, assert_textなど） |
+| Selector | 操作対象の要素（CSSセレクタで指定） |
+| Value | 入力値や待機秒数など、アクションに応じた値 |
+| Expected Result | 検証対象の文字列（通常テキスト or regex:パターン） |
+
+---
+
+## 📈 実行後のレポートファイルについて
+- 実行後にはシナリオファイルに以下の列を追加する形式で、レポートファイルを出力します
+- 詳細はreports/sample_reports.xlsx を参照
+
+| 列名 | 説明 |
+| ---- | ---- |
+| Status | 成功/失敗 |
+| Error | エラーメッセージ |
+| Screenshot | アクションの失敗時のスクリーンショットリンク |
+| Verify Screenshot | 検証失敗時のスクリーンショットリンク |
