@@ -38,6 +38,35 @@ PyInstallerでビルドされた .exe も利用可能です。
 
 ---
 
+## 📂 構成
+```
+AutoWebTest/
+├── config(※配置必須)/
+│   └── .env.example
+│
+├── scenarios(※指定可能)/
+│   └── sample_scenario.xlsx
+│
+├── reports/
+│
+├── screenshots(※指定可能)/
+│
+├── logs/
+│
+├── src/
+│   ├── actions.py
+│   ├── main_runner.py
+│   ├── ui_launcher.py
+│   ├── utils.py
+│   └── verify.py
+│
+├── .gitignore
+│
+└── README.md
+```
+
+---
+
 ## 📄 シナリオファイルの書き方
 - 各シートが1つのシナリオ
 - アクション列、ターゲット列、値列などを記述
@@ -50,7 +79,17 @@ PyInstallerでビルドされた .exe も利用可能です。
 | Action | 実行する操作（click, input, wait, assert_textなど） |
 | Selector | 操作対象の要素（CSSセレクタで指定） |
 | Value | 入力値や待機秒数など、アクションに応じた値 |
-| Expected Result | 検証対象の文字列（通常テキスト or regex:パターン） |
+| Expected Result | 検証対象の文字列（通常テキスト or regex:パターン）。<br>アクションを行った後の期待値とする出力文字列を設定する。 |
+
+### 2. シナリオの書き方（サンプル）
+| Test Case ID | Action | Selector | Value | Expected Result |
+| ---- | ---- | ---- | ---- | ---- |
+| Test_001 | click | #xxxx |  | アカウント |
+| Test_002 | click | #xxxx |  | ログイン |
+| Test_003 | input | #xxxx | {your_id} |  |
+| Test_004 | input | #xxxx | {your_password} |  |
+| Test_005 | click | #xxxx |  |  |
+| Test_006 | wait |  | 5 | ようこそ {your_id} さん！ |
 
 ---
 
@@ -60,7 +99,7 @@ PyInstallerでビルドされた .exe も利用可能です。
 
 | 列名 | 説明 |
 | ---- | ---- |
-| Status | 成功/失敗 |
-| Error | エラーメッセージ |
+| Status | 成功/失敗（Success/Failed） |
+| Error | エラーメッセージ（セレクター取得の失敗時など） |
 | Screenshot | アクションの失敗時のスクリーンショットリンク |
-| Verify Screenshot | 検証失敗時のスクリーンショットリンク |
+| Verify Screenshot | 検証失敗時のスクリーンショットリンク。<br>アクションには成功したが、検索文字列が見つからないときなど。 |
