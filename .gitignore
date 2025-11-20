@@ -17,7 +17,6 @@ build/
 *.spec
 
 # その他
-仕様/
 converted_txt/
 *.bat
 *.txt
