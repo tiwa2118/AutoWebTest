@@ -70,7 +70,7 @@ AutoWebTest/
 ## 📄 シナリオファイルの書き方
 - 各シートが1つのシナリオ( 現在の実装では **アクティブシートのみが対象**（複数シートには未対応）)
 - アクション列、ターゲット列、値列などを記述
-- 詳細は [scenarios/sample_scenario.xlsx](https://github.com/tiwa2118/AutoWebTest/releases) を参照
+- 詳細は [scenarios/sample_scenario.xlsx](https://github.com/tiwa2118/AutoWebTest/blob/dev-private/scenarios/sample_scenario.xlsx) を参照
 
 ### 1. sample_scenario.xlsx の説明
 | 列名 | 説明 |
