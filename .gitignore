@@ -20,4 +20,5 @@ build/
 converted_txt/
 *.bat
 *.txt
+!requirements.txt
 *.env
