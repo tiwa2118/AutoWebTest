@@ -1,0 +1,24 @@
+# pythonキャッシュ
+__pycache__/
+*.pyc
+
+# 実行生成物
+logs/
+reports/
+screenshots/
+
+# シナリオ実行用（サンプル以外）
+scenarios/*.xlsx
+!scenarios/sample_scenario.xlsx
+
+# Pyinstaller生成物
+dist/
+build/
+*.spec
+
+# その他
+converted_txt/
+*.bat
+*.txt
+!requirements.txt
+*.env
