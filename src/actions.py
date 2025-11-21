@@ -27,7 +27,7 @@ def perform_action(driver, action, selector, value, wait_time, screenshot_dir, l
             time.sleep(float(value))
         
         elif action == "assert_text":
-            log_func(f"[ACTION] wait '{value}' 実行中...")
+            log_func(f"[ACTION] assert_text '{value}' 実行中...")
             WebDriverWait(driver, wait_time).until(
                 EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{value}')]"))
             )
