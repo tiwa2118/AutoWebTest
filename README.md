@@ -15,7 +15,7 @@ Seleniumをベースに、検証・スクリーンショット・レポート出
 ## 🛠️ インストールと実行方法
 ### 1. リポジトリをクローン
 ```bash
-git clone https://github.com/yourname/AutoWebTest.git
+git clone https://github.com/tiwa2118/AutoWebTest.git
 cd AutoWebTest
 ```
 
