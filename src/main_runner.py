@@ -28,12 +28,6 @@ def init_driver(url: str, browser: str):
     driver.get(url)
     return driver
 
-def load_excel(scenario_file: str):
-    # Excel読み込み
-    wb = openpyxl.load_workbook(scenario_file)
-    ws = wb.active
-    return wb, ws
-
 def prepare_columns(ws):
     header = [cell.value for cell in ws[1]]
     idx = {
@@ -69,34 +63,15 @@ def prepare_columns(ws):
 
     return idx
 
-def run_test_scenario(
-    url: str,
-    scenario_file: str,
-    wait_time: int,
-    use_regex: bool,
-    verify_enabled: bool,
-    screenshot_dir: str,
-    browser: str,
-    log_func=print 
-) -> str:
-    try: 
-        driver = init_driver(url, browser)
-        log_func(f"[INFO] ブラウザ初期化: {browser}")
-
-        wb, ws = load_excel(scenario_file)
-        log_func(f"[INFO] Excel読み込み: {scenario_file}")
-
-        idx = prepare_columns(ws)      
-
-        # Excel読み込み・ループ処理
-        log_func(f"[INFO] テスト開始: {url}")
-        for row in ws.iter_rows(min_row=2, values_only=False):
+def run_scenario(ws, wb, driver, idx, wait_time, use_regex,
+                 verify_enabled, screenshot_dir, log_func):
+    
+    for row in ws.iter_rows(min_row=2, values_only=False):
             test_id = row[idx["test_id"]].value
             if not test_id or str(test_id).strip() == "":
                 continue
           
             verify_screenshot = None  # 未定義に備えた初期化
-
             action = row[idx["action"]].value
             selector = row[idx["selector"]].value
             value = row[idx["value"]].value
@@ -126,12 +101,38 @@ def run_test_scenario(
             else:
                 log_func(f"[FAIL] {test_id} 失敗 | Error: {error}")
 
+
+def run_test_scenario(
+    url: str,
+    scenario_file: str,
+    wait_time: int,
+    use_regex: bool,
+    verify_enabled: bool,
+    screenshot_dir: str,
+    browser: str,
+    log_func=print 
+) -> str:
+    try: 
+        driver = init_driver(url, browser)
+        log_func(f"[INFO] ブラウザ初期化: {browser}")
+
+        wb = openpyxl.load_workbook(scenario_file)
+        log_func(f"[INFO] Excel読み込み: {scenario_file}")
+
+        # 各シートごとに順番に処理
+        for sheet_name in wb.sheetnames:
+            ws = wb[sheet_name]
+            log_func(f"[INFO] シナリオ開始: {sheet_name}")
+            idx = prepare_columns(ws)
+            run_scenario(ws, wb, driver, idx, wait_time, use_regex,
+                         verify_enabled, screenshot_dir, log_func)
+
         # レポート保存
         timestamp = time.strftime("%Y%m%d_%H%M%S")
         report_path = f"./reports/test_report_{timestamp}.xlsx"
         wb.save(report_path)
         driver.quit()
-        print(f"[INFO] テスト完了。レポート保存済み: {report_path}")
+        print(f"[INFO] 全シナリオ完了。レポート保存済み: {report_path}")
         return report_path
 
     except Exception as e:
