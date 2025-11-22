@@ -69,7 +69,7 @@ AutoWebTest/
 ---
 
 ## 📄 シナリオファイルの書き方
-- 各シートが1つのシナリオ( 現在の実装では **アクティブシートのみが対象**（複数シートには未対応）)
+- 各シートが1つのシナリオ
 - アクション列、ターゲット列、値列などを記述
 - 詳細は [scenarios/sample_scenario.xlsx](scenarios/sample_scenario.xlsx) を参照
 
