@@ -48,11 +48,11 @@ AutoWebTest/
 ├── scenarios(※指定可能)/
 │   └── sample_scenario.xlsx
 │
-├── reports/
+├── reports(※自動生成)/
 │
 ├── screenshots(※指定可能)/
 │
-├── logs/
+├── logs(※自動生成)/
 │
 ├── src/
 │   ├── actions.py
@@ -77,10 +77,11 @@ AutoWebTest/
 | 列名 | 説明 |
 | ---- | ---- |
 | Test Case ID | テストケースの識別子（空欄はスキップされる） |
-| Action | 実行する操作（click, input, wait, assert_textなど） |
+| Action | 実行する操作（click, input, wait, assert_text, hoverなど） |
 | Selector | 操作対象の要素（CSSセレクタで指定） |
 | Value | 入力値や待機秒数など、アクションに応じた値 |
 | Expected Result | 検証対象の文字列（通常テキスト or regex:パターン）。<br>アクションを行った後の期待値とする出力文字列を設定する。 |
+| Comment | コメント入力欄。どういったテストケースなのかを理解するためのメモなどを記入する。<br>プログラムではこの列は参照しない。 |
 
 ### 2. シナリオの書き方（サンプル）
 | Test Case ID | Action | Selector | Value | Expected Result |
